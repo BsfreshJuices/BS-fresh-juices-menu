@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123b2d">
+  <title>BS Fresh Juices</title>
+  <style>
+    :root{--green:#123b2d;--green2:#1e5942;--cream:#f7f7f1;--orange:#e58a3a;--ink:#17251e}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}
+    header{background:var(--green);color:white;padding:24px 20px 48px;text-align:center}
+    .top{display:flex;justify-content:flex-end;max-width:1050px;margin:auto}
+    button{font:inherit;cursor:pointer}.lang{background:transparent;color:white;border:1px solid #ffffff80;border-radius:24px;padding:8px 14px}
+    .brand{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:2px;margin:24px 0 8px}
+    .tag{color:#e8eee9;margin:0;font-size:14px;letter-spacing:1.5px}
+    main{max-width:1050px;margin:-24px auto 0;padding:0 18px 60px}
+    .intro{text-align:center;margin:0 auto 28px;max-width:600px}
+    .intro h1{font-size:25px;margin:0 0 8px;color:var(--green)}
+    .intro p{margin:0;color:#66736b;line-height:1.6}
+    .empty{background:white;border:1px solid #e5e9e2;border-radius:18px;padding:42px 20px;text-align:center;box-shadow:0 12px 35px #173d2510}
+    .leaf{font-size:35px}.empty h2{color:var(--green);margin:12px 0 8px;font-size:20px}.empty p{color:#778078;margin:0;line-height:1.6}
+    footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
+    [dir=rtl] body{text-align:right}[dir=rtl] .top{justify-content:flex-start}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top"><button class="lang" id="language" type="button">العربية</button></div>
+    <div class="brand">BS FRESH JUICES</div>
+    <p class="tag" id="tagline">FRESHNESS IN EVERY SIP</p>
+  </header>
+  <main>
+    <section class="intro">
+      <h1 id="heading">Our Menu</h1>
+      <p id="description">Freshly prepared with care. Our menu is being prepared — come back soon.</p>
+    </section>
+    <section class="empty" aria-live="polite">
+      <div class="leaf">🍊</div>
+      <h2 id="emptyTitle">A fresh experience is coming</h2>
+      <p id="emptyText">Our categories and products will appear here soon.</p>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> BS Fresh Juices</footer>
+  <script>
+    const copy = {
+      en:{button:"العربية",tag:"FRESHNESS IN EVERY SIP",heading:"Our Menu",description:"Freshly prepared with care. Our menu is being prepared — come back soon.",title:"A fresh experience is coming",text:"Our categories and products will appear here soon."},
+      ar:{button:"English",tag:"الانتعاش في كل رشفة",heading:"قائمتنا",description:"نحضّر كل شيء بعناية وطزاجة. قائمتنا قيد التجهيز — زورونا قريباً.",title:"تجربة طازجة بانتظاركم",text:"ستظهر الأقسام والأصناف هنا قريباً."}
+    };
+    let lang="en";
+    document.getElementById("language").addEventListener("click",()=>{
+      lang=lang==="en"?"ar":"en";const t=copy[lang];document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+      document.getElementById("language").textContent=t.button;document.getElementById("tagline").textContent=t.tag;
+      document.getElementById("heading").textContent=t.heading;document.getElementById("description").textContent=t.description;
+      document.getElementById("emptyTitle").textContent=t.title;document.getElementById("emptyText").textContent=t.text;
+    });
+    document.getElementById("year").textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
