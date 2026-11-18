@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BS Fresh Juices — Admin</title>
+<style>
+:root{--g:#123b2d;--a:#e58a3a;--bg:#f5f6f2}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#18251e}
+header{background:var(--g);color:white;padding:20px}header h1{margin:0;font-size:21px}main{max-width:850px;margin:24px auto;padding:0 15px}
+.panel{background:white;border:1px solid #e2e8e1;border-radius:14px;padding:20px;margin:0 0 16px}
+h2{font-size:18px;color:var(--g);margin:0 0 14px}label{display:block;font-size:13px;font-weight:700;margin:10px 0 5px}
+input,textarea,select{width:100%;padding:11px;border:1px solid #ccd5cc;border-radius:8px;font:inherit;background:white}
+textarea{min-height:65px;resize:vertical}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{border:0;border-radius:8px;padding:11px 15px;background:var(--g);color:white;font-weight:700;cursor:pointer;margin:10px 6px 0 0}
+button.secondary{background:#e9eee9;color:var(--g)}button.danger{background:#a83232}
+.item{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #edf0eb;padding:12px 0}
+.item small{display:block;color:#6b766e;margin-top:4px}.muted{color:#68746c;font-size:13px;line-height:1.5}
+#app,#login{display:none}.status{padding:10px;border-radius:8px;background:#f0f4ef;margin:12px 0;font-size:13px;white-space:pre-wrap}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.item{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><h1>BS FRESH JUICES · Admin</h1></header>
+<main>
+<section id="login" class="panel">
+<h2>Admin sign in</h2><p class="muted">Sign in with the admin account created in Supabase Authentication.</p>
+<label>Email</label><input id="email" type="email" autocomplete="username">
+<label>Password</label><input id="password" type="password" autocomplete="current-password">
+<button id="signIn">Sign in</button><div id="loginStatus" class="status">Connect your Supabase project to continue.</div>
+</section>
+<section id="app">
+<div class="panel"><div class="item"><div><h2 style="margin:0">Control panel</h2><small id="who"></small></div><button class="secondary" id="signOut">Sign out</button></div><div id="status" class="status">Ready.</div></div>
+<div class="panel"><h2>Categories</h2>
+<div class="grid"><div><label>Name (English)</label><input id="catEn"></div><div><label>الاسم (عربي)</label><input id="catAr" dir="rtl"></div></div>
+<button id="addCat">Add category</button><div id="categories"></div></div>
+<div class="panel"><h2>Products</h2>
+<label>Category</label><select id="productCategory"></select>
+<div class="grid"><div><label>Name (English)</label><input id="prodEn"></div><div><label>الاسم (عربي)</label><input id="prodAr" dir="rtl"></div></div>
+<div class="grid"><div><label>Description (English)</label><textarea id="descEn"></textarea></div><div><label>الوصف (عربي)</label><textarea id="descAr" dir="rtl"></textarea></div></div>
+<div class="grid"><div><label>Price</label><input id="price" type="number" min="0" step="0.01"></div><div><label>Product image</label><input id="image" type="file" accept="image/*"></div></div>
+<button id="addProduct">Add product</button><div id="products"></div></div>
+<div class="panel"><h2>Brand appearance</h2>
+<label>Brand name</label><input id="brand" value="BS FRESH JUICES">
+<div class="grid"><div><label>Primary colour</label><input id="primary" type="color" value="#123b2d"></div><div><label>Accent colour</label><input id="accent" type="color" value="#e58a3a"></div></div>
+<button id="saveSettings">Save appearance</button>
+<p class="muted">More design controls and editing existing items will be added in the next build.</p></div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./supabase-config.js"></script>
+<script>
+const $=id=>document.getElementById(id);let sb=null,user=null,categories=[];
+function say(message,where="status"){ $(where).textContent=message; }
+function setup(){
+ if(!window.supabase||!window.BS_SUPABASE_URL||window.BS_SUPABASE_URL.includes("PASTE_")||!window.BS_SUPABASE_ANON_KEY||window.BS_SUPABASE_ANON_KEY.includes("PASTE_")){
+   $("login").style.display="block";say("First add your Supabase project URL and publishable/anon key in supabase-config.js.","loginStatus");return;
+ }
+ sb=window.supabase.createClient(window.BS_SUPABASE_URL,window.BS_SUPABASE_ANON_KEY);
+ sb.auth.getSession().then(({data})=>{if(data.session) enter(data.session.user);else $("login").style.display="block";});
+}
+async function enter(u){
+ user=u;
+ const {data:admin,error}=await sb.from("admin_users").select("user_id").eq("user_id",u.id).maybeSingle();
+ if(error||!admin){$("login").style.display="block";say("This account is signed in but is not registered as a BS Fresh Juices admin. Add its user ID to public.admin_users in Supabase SQL Editor.", "loginStatus");return;}
+ $("login").style.display="none";$("app").style.display="block";$("who").textContent=u.email||"Admin";await loadAll();
+}
+async function loadAll(){await loadCategories();await loadProducts();const {data}=await sb.from("site_settings").select("*").eq("id",1).single();if(data){$("brand").value=data.brand_name;$("primary").value=data.primary_color;$("accent").value=data.accent_color;}}
+async function loadCategories(){
+ const {data,error}=await sb.from("categories").select("*").order("sort_order").order("created_at");
+ if(error){say(error.message);return;}categories=data||[];
+ $("categories").innerHTML=categories.map(c=>'<div class="item"><div><b>'+esc(c.name_en||c.name_ar)+'</b><small>'+esc(c.name_ar)+' · '+(c.is_active?"Visible":"Hidden")+'</small></div><div><button class="secondary" onclick="toggleCat(\''+c.id+'\','+(!c.is_active)+')">'+(c.is_active?"Hide":"Show")+'</button><button class="danger" onclick="deleteCat(\''+c.id+'\')">Delete</button></div></div>').join("");
+ $("productCategory").innerHTML=categories.map(c=>'<option value="'+c.id+'">'+esc(c.name_en||c.name_ar)+'</option>').join("");
+}
+async function loadProducts(){
+ const {data,error}=await sb.from("products").select("*,categories(name_en,name_ar)").order("sort_order").order("created_at");
+ if(error){say(error.message);return;}
+ $("products").innerHTML=(data||[]).map(p=>'<div class="item"><div><b>'+esc(p.name_en||p.name_ar)+'</b><small>'+esc(p.categories?.name_en||p.categories?.name_ar||"")+' · '+(p.price??"—")+'</small></div><div><button class="secondary" onclick="toggleProd(\''+p.id+'\','+(!p.is_active)+')">'+(p.is_active?"Hide":"Show")+'</button><button class="danger" onclick="deleteProd(\''+p.id+'\')">Delete</button></div></div>').join("");
+}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+$("signIn").onclick=async()=>{const {data,error}=await sb.auth.signInWithPassword({email:$("email").value,password:$("password").value});if(error)say(error.message,"loginStatus");else await enter(data.user);};
+$("signOut").onclick=async()=>{await sb.auth.signOut();location.reload();};
+$("addCat").onclick=async()=>{const {error}=await sb.from("categories").insert({name_en:$("catEn").value.trim(),name_ar:$("catAr").value.trim(),sort_order:categories.length});if(error)say(error.message);else{$("catEn").value=$("catAr").value="";say("Category added.");await loadCategories();}};
+window.toggleCat=async(id,v)=>{const {error}=await sb.from("categories").update({is_active:v}).eq("id",id);say(error?error.message:"Category updated.");await loadCategories();};
+window.deleteCat=async(id)=>{if(!confirm("Delete this category and its products?"))return;const {error}=await sb.from("categories").delete().eq("id",id);say(error?error.message:"Category deleted.");await loadAll();};
+$("addProduct").onclick=async()=>{
+ const category_id=$("productCategory").value;if(!category_id){say("Add a category first.");return;}
+ let image_path=null;const file=$("image").files[0];
+ if(file){const ext=(file.name.split(".").pop()||"jpg").toLowerCase();const path=user.id+"/"+crypto.randomUUID()+"."+ext;const up=await sb.storage.from("menu-images").upload(path,file,{upsert:false});if(up.error){say(up.error.message);return;}image_path=path;}
+ const {error}=await sb.from("products").insert({category_id,name_en:$("prodEn").value.trim(),name_ar:$("prodAr").value.trim(),description_en:$("descEn").value.trim(),description_ar:$("descAr").value.trim(),price:$("price").value||null,image_path});
+ if(error)say(error.message);else{say("Product added.");["prodEn","prodAr","descEn","descAr","price","image"].forEach(id=>$(id).value="");await loadProducts();}
+};
+window.toggleProd=async(id,v)=>{const {error}=await sb.from("products").update({is_active:v}).eq("id",id);say(error?error.message:"Product updated.");await loadProducts();};
+window.deleteProd=async(id)=>{if(!confirm("Delete this product?"))return;const {error}=await sb.from("products").delete().eq("id",id);say(error?error.message:"Product deleted.");await loadProducts();};
+$("saveSettings").onclick=async()=>{const {error}=await sb.from("site_settings").update({brand_name:$("brand").value,primary_color:$("primary").value,accent_color:$("accent").value,updated_at:new Date().toISOString()}).eq("id",1);say(error?error.message:"Appearance settings saved.");};
+setup();
+</script>
+</body></html>
