@@ -1,59 +1,111 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#123b2d">
-  <title>BS Fresh Juices</title>
-  <style>
-    :root{--green:#123b2d;--green2:#1e5942;--cream:#f7f7f1;--orange:#e58a3a;--ink:#17251e}
-    *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}
-    header{background:var(--green);color:white;padding:24px 20px 48px;text-align:center}
-    .top{display:flex;justify-content:flex-end;max-width:1050px;margin:auto}
-    button{font:inherit;cursor:pointer}.lang{background:transparent;color:white;border:1px solid #ffffff80;border-radius:24px;padding:8px 14px}
-    .brand{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:2px;margin:24px 0 8px}
-    .tag{color:#e8eee9;margin:0;font-size:14px;letter-spacing:1.5px}
-    main{max-width:1050px;margin:-24px auto 0;padding:0 18px 60px}
-    .intro{text-align:center;margin:0 auto 28px;max-width:600px}
-    .intro h1{font-size:25px;margin:0 0 8px;color:var(--green)}
-    .intro p{margin:0;color:#66736b;line-height:1.6}
-    .empty{background:white;border:1px solid #e5e9e2;border-radius:18px;padding:42px 20px;text-align:center;box-shadow:0 12px 35px #173d2510}
-    .leaf{font-size:35px}.empty h2{color:var(--green);margin:12px 0 8px;font-size:20px}.empty p{color:#778078;margin:0;line-height:1.6}
-    footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
-    [dir=rtl] body{text-align:right}[dir=rtl] .top{justify-content:flex-start}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123b2d">
+<title>BS Fresh Juices</title>
+<style>
+:root{--green:#123b2d;--green2:#1e5942;--cream:#f7f7f1;--orange:#e58a3a;--ink:#17251e}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}
+header{background:var(--green);color:white;padding:22px 18px 42px;text-align:center}
+.top{display:flex;justify-content:flex-end;max-width:1050px;margin:auto}
+button{font:inherit;cursor:pointer}.lang,.back{background:transparent;color:white;border:1px solid #ffffff80;border-radius:24px;padding:8px 14px}
+.brand{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:2px;margin:22px 0 8px}
+.tag{color:#e8eee9;margin:0;font-size:14px;letter-spacing:1.5px}
+main{max-width:1050px;margin:-22px auto 0;padding:0 16px 55px}
+.intro{text-align:center;margin:0 auto 25px;max-width:650px}
+.intro h1{font-size:25px;margin:0 0 8px;color:var(--green)}
+.intro p{margin:0;color:#66736b;line-height:1.6}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px}
+.category{background:white;border:1px solid #e5e9e2;border-radius:16px;padding:22px;text-align:center;color:var(--green);font-weight:700;font-size:18px;box-shadow:0 8px 25px #173d250b}
+.category:active{transform:scale(.99)}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.product{background:white;border:1px solid #e5e9e2;border-radius:16px;overflow:hidden;box-shadow:0 8px 25px #173d250b}
+.product img{width:100%;height:190px;object-fit:cover;background:#edf1eb;display:block}
+.product .info{padding:15px}.product h3{margin:0 0 7px;color:var(--green);font-size:18px}
+.product p{margin:0;color:#68746c;line-height:1.5;font-size:14px;white-space:pre-wrap}
+.price{margin-top:12px;color:var(--orange);font-size:18px;font-weight:800}
+.notice{background:white;border:1px solid #e5e9e2;border-radius:16px;padding:30px 18px;text-align:center;color:#68746c;line-height:1.6}
+.back{display:block;margin:0 auto 18px;background:var(--green);border:0}
+footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
+[dir=rtl] body{text-align:right}[dir=rtl] .top{justify-content:flex-start}
+@media(max-width:480px){.category-grid{grid-template-columns:1fr 1fr;gap:10px}.category{padding:18px 10px;font-size:16px}.product img{height:170px}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="top"><button class="lang" id="language" type="button">العربية</button></div>
-    <div class="brand">BS FRESH JUICES</div>
-    <p class="tag" id="tagline">FRESHNESS IN EVERY SIP</p>
-  </header>
-  <main>
-    <section class="intro">
-      <h1 id="heading">Our Menu</h1>
-      <p id="description">Freshly prepared with care. Our menu is being prepared — come back soon.</p>
-    </section>
-    <section class="empty" aria-live="polite">
-      <div class="leaf">🍊</div>
-      <h2 id="emptyTitle">A fresh experience is coming</h2>
-      <p id="emptyText">Our categories and products will appear here soon.</p>
-    </section>
-  </main>
-  <footer>© <span id="year"></span> BS Fresh Juices</footer>
-  <script>
-    const copy = {
-      en:{button:"العربية",tag:"FRESHNESS IN EVERY SIP",heading:"Our Menu",description:"Freshly prepared with care. Our menu is being prepared — come back soon.",title:"A fresh experience is coming",text:"Our categories and products will appear here soon."},
-      ar:{button:"English",tag:"الانتعاش في كل رشفة",heading:"قائمتنا",description:"نحضّر كل شيء بعناية وطزاجة. قائمتنا قيد التجهيز — زورونا قريباً.",title:"تجربة طازجة بانتظاركم",text:"ستظهر الأقسام والأصناف هنا قريباً."}
-    };
-    let lang="en";
-    document.getElementById("language").addEventListener("click",()=>{
-      lang=lang==="en"?"ar":"en";const t=copy[lang];document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
-      document.getElementById("language").textContent=t.button;document.getElementById("tagline").textContent=t.tag;
-      document.getElementById("heading").textContent=t.heading;document.getElementById("description").textContent=t.description;
-      document.getElementById("emptyTitle").textContent=t.title;document.getElementById("emptyText").textContent=t.text;
-    });
-    document.getElementById("year").textContent=new Date().getFullYear();
-  </script>
+<header>
+ <div class="top"><button class="lang" id="language" type="button">العربية</button></div>
+ <div class="brand" id="brand">BS FRESH JUICES</div>
+ <p class="tag" id="tagline">FRESHNESS IN EVERY SIP</p>
+</header>
+<main>
+ <section class="intro"><h1 id="heading">Our Menu</h1><p id="description">Freshly prepared with care.</p></section>
+ <button id="back" class="back" hidden type="button">← Back to categories</button>
+ <section id="content" aria-live="polite"><div class="notice">Loading menu…</div></section>
+</main>
+<footer>© <span id="year"></span> <span id="footerBrand">BS Fresh Juices</span></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./supabase-config.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const words={
+ en:{switch:"العربية",heading:"Our Menu",description:"Freshly prepared with care.",back:"← Back to categories",empty:"Our menu is being prepared. Please check back soon.",error:"We couldn't load the menu right now. Please try again later."},
+ ar:{switch:"English",heading:"قائمتنا",description:"نحضّر كل شيء بعناية وطزاجة.",back:"العودة إلى الأقسام →",empty:"قائمتنا قيد التجهيز. زورونا قريباً.",error:"تعذّر تحميل القائمة حالياً. حاولوا مرة أخرى لاحقاً."}
+};
+let lang="en",client=null,allProducts=[],currentCategory=null,cats=[];
+function tr(en,ar){return lang==="ar"?(ar||en):(en||ar);}
+function publicImage(path){
+ if(!path||!client)return "";
+ return client.storage.from("menu-images").getPublicUrl(path).data.publicUrl;
+}
+function renderCategories(){
+ currentCategory=null;$("back").hidden=true;
+ $("heading").textContent=words[lang].heading;
+ const visible=cats;
+ if(!visible.length){$("content").innerHTML='<div class="notice">'+words[lang].empty+'</div>';return;}
+ $("content").innerHTML='<div class="category-grid">'+visible.map(c=>'<button class="category" type="button" data-cat="'+c.id+'">'+escapeHtml(tr(c.name_en,c.name_ar))+'</button>').join("")+'</div>';
+ document.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>renderProducts(b.dataset.cat)));
+}
+function renderProducts(id){
+ currentCategory=id;const cat=cats.find(c=>c.id===id);$("back").hidden=false;
+ $("heading").textContent=tr(cat?.name_en,cat?.name_ar)||words[lang].heading;
+ const items=allProducts.filter(p=>p.category_id===id);
+ if(!items.length){$("content").innerHTML='<div class="notice">'+words[lang].empty+'</div>';return;}
+ $("content").innerHTML='<div class="products">'+items.map(p=>{
+ const image=publicImage(p.image_path);
+ return '<article class="product">'+(image?'<img loading="lazy" src="'+escapeAttr(image)+'" alt="'+escapeAttr(tr(p.name_en,p.name_ar))+'">':'')+
+ '<div class="info"><h3>'+escapeHtml(tr(p.name_en,p.name_ar))+'</h3>'+
+ ((tr(p.description_en,p.description_ar))?'<p>'+escapeHtml(tr(p.description_en,p.description_ar))+'</p>':'')+
+ (p.price!==null&&p.price!==undefined?'<div class="price">'+escapeHtml(String(p.price))+'</div>':'')+
+ '</div></article>';
+ }).join("")+'</div>';
+}
+function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function escapeAttr(v){return escapeHtml(v);}
+function applyLanguage(){
+ const t=words[lang];document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ $("language").textContent=t.switch;$("description").textContent=t.description;$("back").textContent=t.back;
+ if(currentCategory)renderProducts(currentCategory);else renderCategories();
+}
+$("language").addEventListener("click",()=>{lang=lang==="en"?"ar":"en";applyLanguage();});
+$("back").addEventListener("click",renderCategories);
+$("year").textContent=new Date().getFullYear();
+async function start(){
+ if(!window.supabase||!window.BS_SUPABASE_URL||!window.BS_SUPABASE_ANON_KEY){$("content").innerHTML='<div class="notice">'+words[lang].error+'</div>';return;}
+ client=window.supabase.createClient(window.BS_SUPABASE_URL,window.BS_SUPABASE_ANON_KEY);
+ try{
+  const [settings,categories,products]=await Promise.all([
+   client.from("site_settings").select("*").eq("id",1).maybeSingle(),
+   client.from("categories").select("*").eq("is_active",true).order("sort_order").order("created_at"),
+   client.from("products").select("*").eq("is_active",true).order("sort_order").order("created_at")
+  ]);
+  if(settings.error)throw settings.error;if(categories.error)throw categories.error;if(products.error)throw products.error;
+  if(settings.data){const s=settings.data;$("brand").textContent=s.brand_name||"BS FRESH JUICES";$("footerBrand").textContent=s.brand_name||"BS Fresh Juices";$("tagline").textContent=tr(s.tagline_en,s.tagline_ar)||words[lang].description;document.documentElement.style.setProperty("--green",s.primary_color||"#123b2d");document.documentElement.style.setProperty("--orange",s.accent_color||"#e58a3a");document.documentElement.style.setProperty("--green2",s.secondary_color||"#1e5942");document.documentElement.style.setProperty("--cream",s.background_color||"#f7f7f1");}
+  cats=categories.data||[];allProducts=products.data||[];applyLanguage();
+ }catch(err){console.error(err);$("content").innerHTML='<div class="notice">'+words[lang].error+'</div>';}
+}
+start();
+</script>
 </body>
 </html>
