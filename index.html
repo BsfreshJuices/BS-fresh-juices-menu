@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#123b2d">
 <title>BS Fresh Juices</title>
 <style>
-:root{--green:#123b2d;--green2:#1e5942;--cream:#f7f7f1;--orange:#e58a3a;--ink:#17251e}
+:root{--green:#183d32;--green2:#31584b;--cream:#faf9f5;--orange:#b88a50;--ink:#202820;--view-primary:#183d32;--view-secondary:#e8eee9;--view-accent:#b88a50;--view-bg:#faf9f5}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}
 header{background:var(--green);color:white;padding:22px 18px 42px;text-align:center}
 .top{display:flex;justify-content:flex-end;max-width:1050px;margin:auto}
@@ -21,11 +21,16 @@ main{max-width:1050px;margin:-22px auto 0;padding:0 16px 55px}
 .category{background:white;border:1px solid #e5e9e2;border-radius:16px;padding:22px;text-align:center;color:var(--green);font-weight:700;font-size:18px;box-shadow:0 8px 25px #173d250b}
 .category:active{transform:scale(.99)}
 .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.product{background:white;border:1px solid #e5e9e2;border-radius:16px;overflow:hidden;box-shadow:0 8px 25px #173d250b}
-.product img{width:100%;height:190px;object-fit:cover;background:#edf1eb;display:block}
-.product .info{padding:15px}.product h3{margin:0 0 7px;color:var(--green);font-size:18px}
+.product{background:var(--view-secondary);border:1px solid color-mix(in srgb,var(--view-primary) 14%,white);border-radius:16px;overflow:hidden;box-shadow:0 8px 25px #173d250b}
+.product img{width:100%;height:190px;object-fit:cover;background:var(--view-bg);display:block}
+.product .info{padding:15px}.product h3{margin:0 0 7px;color:var(--view-primary);font-size:18px}
 .product p{margin:0;color:#68746c;line-height:1.5;font-size:14px;white-space:pre-wrap}
-.price{margin-top:12px;color:var(--orange);font-size:18px;font-weight:800}
+.price{margin-top:12px;color:var(--view-accent);font-size:18px;font-weight:800}
+body.category-open{background:var(--view-bg)}
+body.category-open header{background:var(--view-primary)}
+body.category-open .intro h1{color:var(--view-primary)}
+body.category-open .product .info{background:var(--view-secondary)}
+body.category-open .product p{color:color-mix(in srgb,var(--view-primary) 70%,#777)}
 .notice{background:white;border:1px solid #e5e9e2;border-radius:16px;padding:30px 18px;text-align:center;color:#68746c;line-height:1.6}
 .back{display:block;margin:0 auto 18px;background:var(--green);border:0}
 footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
@@ -60,7 +65,7 @@ function publicImage(path){
  return client.storage.from("menu-images").getPublicUrl(path).data.publicUrl;
 }
 function renderCategories(){
- currentCategory=null;$("back").hidden=true;
+ currentCategory=null;document.body.classList.remove("category-open");$("back").hidden=true;
  $("heading").textContent=words[lang].heading;
  const visible=cats;
  if(!visible.length){$("content").innerHTML='<div class="notice">'+words[lang].empty+'</div>';return;}
@@ -68,7 +73,13 @@ function renderCategories(){
  document.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>renderProducts(b.dataset.cat)));
 }
 function renderProducts(id){
- currentCategory=id;const cat=cats.find(c=>c.id===id);$("back").hidden=false;
+ currentCategory=id;const cat=cats.find(c=>c.id===id);document.body.classList.add("category-open");
+ const validColor=(v,f)=>/^#[0-9a-fA-F]{6}$/.test(v||"")?v:f;
+ document.documentElement.style.setProperty("--view-primary",validColor(cat?.theme_primary,"#183d32"));
+ document.documentElement.style.setProperty("--view-secondary",validColor(cat?.theme_secondary,"#e8eee9"));
+ document.documentElement.style.setProperty("--view-accent",validColor(cat?.theme_accent,"#b88a50"));
+ document.documentElement.style.setProperty("--view-bg",validColor(cat?.theme_background,"#faf9f5"));
+ $("back").hidden=false;
  $("heading").textContent=tr(cat?.name_en,cat?.name_ar)||words[lang].heading;
  const items=allProducts.filter(p=>p.category_id===id);
  if(!items.length){$("content").innerHTML='<div class="notice">'+words[lang].empty+'</div>';return;}
@@ -101,7 +112,7 @@ async function start(){
    client.from("products").select("*").eq("is_active",true).order("sort_order").order("created_at")
   ]);
   if(settings.error)throw settings.error;if(categories.error)throw categories.error;if(products.error)throw products.error;
-  if(settings.data){const s=settings.data;$("brand").textContent=s.brand_name||"BS FRESH JUICES";if(s.logo_path){$("brandLogo").src=publicImage(s.logo_path);$("brandLogo").hidden=false;$("brandLogo").style.display="block";$("brand").style.display="none";}else{$("brandLogo").hidden=true;$("brandLogo").style.display="none";$("brand").style.display="block";}$("footerBrand").textContent=s.brand_name||"BS Fresh Juices";$("tagline").textContent=tr(s.tagline_en,s.tagline_ar)||words[lang].description;document.documentElement.style.setProperty("--green",s.primary_color||"#123b2d");document.documentElement.style.setProperty("--orange",s.accent_color||"#e58a3a");document.documentElement.style.setProperty("--green2",s.secondary_color||"#1e5942");document.documentElement.style.setProperty("--cream",s.background_color||"#f7f7f1");}
+  if(settings.data){const s=settings.data;$("brand").textContent=s.brand_name||"BS FRESH JUICES";if(s.logo_path){$("brandLogo").src=publicImage(s.logo_path);$("brandLogo").hidden=false;$("brandLogo").style.display="block";$("brand").style.display="none";}else{$("brandLogo").hidden=true;$("brandLogo").style.display="none";$("brand").style.display="block";}$("footerBrand").textContent=s.brand_name||"BS Fresh Juices";$("tagline").textContent=tr(s.tagline_en,s.tagline_ar)||words[lang].description;/* Homepage colours stay intentionally calm and premium; category pages use their own saved themes. */}
   cats=categories.data||[];allProducts=products.data||[];applyLanguage();
  }catch(err){console.error(err);$("content").innerHTML='<div class="notice">'+words[lang].error+'</div>';}
 }
