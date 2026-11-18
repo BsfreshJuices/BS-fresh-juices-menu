@@ -14,12 +14,32 @@ button{font:inherit;cursor:pointer}.lang,.back{background:transparent;color:whit
 .brand{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:2px;margin:22px 0 8px}
 .tag{color:#e8eee9;margin:0;font-size:14px;letter-spacing:1.5px}
 main{max-width:1050px;margin:-22px auto 0;padding:0 16px 55px}
+.intro{text-align:center;margin:0 auto 18px;max-width:760px;padding:24px 18px 10px}
+.intro h1{font-size:clamp(25px,5vw,38px);margin:0 0 10px;color:var(--green);letter-spacing:.2px}
+.intro p{margin:0;color:#68746c;line-height:1.7;font-size:15px}
+.home-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:20px;padding:25px;margin:0 0 28px;border-radius:24px;background:linear-gradient(135deg,#173d30,#315b49 72%,#52735e);color:#fff;box-shadow:0 18px 42px #173d3020}
+.home-hero:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #ffffff20;border-radius:50%;right:-90px;top:-130px;pointer-events:none}
+.hero-copy{position:relative;z-index:1}.hero-kicker{display:inline-block;color:#e7d1a9;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.hero-copy h2{font-size:clamp(25px,4vw,39px);line-height:1.15;margin:0 0 12px;color:white}
+.hero-copy p{margin:0;color:#e3ebe5;line-height:1.7;font-size:14px;max-width:390px}
+.hero-note{display:inline-block;margin-top:18px;padding:9px 14px;border:1px solid #ffffff55;border-radius:30px;color:#fff;font-size:12px;letter-spacing:.5px}
+.hero-gallery{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:100px 100px;gap:10px;min-height:210px}
+.hero-gallery img{width:100%;height:100%;object-fit:cover;border-radius:16px;background:#ffffff20;box-shadow:0 8px 20px #0002}
+.hero-gallery img:first-child{grid-row:span 2}
+.hero-gallery .hero-placeholder{grid-row:span 2;border-radius:16px;background:linear-gradient(145deg,#f3d9a7,#d17b48 55%,#7c382d);display:flex;align-items:center;justify-content:center;font-size:52px}
+.section-heading{text-align:center;margin:0 0 16px;color:var(--green);font-size:19px;letter-spacing:.3px}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px}
+.category{position:relative;overflow:hidden;min-height:185px;padding:0;text-align:left;border:1px solid #e5e9e2;border-radius:18px;background:#fff;color:var(--green);box-shadow:0 9px 28px #173d2510;transition:transform .18s,box-shadow .18s}
+.category:active{transform:scale(.985)}
+.category img{display:block;width:100%;height:132px;object-fit:cover;background:linear-gradient(135deg,#e6eee7,#f7ead8)}
+.category .category-name{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:13px 14px;font-size:16px;font-weight:700}
+.category .category-arrow{color:#b88a50;font-size:20px}
 .intro{text-align:center;margin:0 auto 25px;max-width:650px}
 .intro h1{font-size:25px;margin:0 0 8px;color:var(--green)}
 .intro p{margin:0;color:#66736b;line-height:1.6}
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px}
 .category{background:white;border:1px solid #e5e9e2;border-radius:16px;padding:22px;text-align:center;color:var(--green);font-weight:700;font-size:18px;box-shadow:0 8px 25px #173d250b}
-.category:active{transform:scale(.99)}
+
 .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .product{background:var(--view-secondary);border:1px solid color-mix(in srgb,var(--view-primary) 14%,white);border-radius:16px;overflow:hidden;box-shadow:0 8px 25px #173d250b}
 .product img{width:100%;height:190px;object-fit:cover;background:var(--view-bg);display:block}
@@ -33,9 +53,11 @@ body.category-open .product .info{background:var(--view-secondary)}
 body.category-open .product p{color:color-mix(in srgb,var(--view-primary) 70%,#777)}
 .notice{background:white;border:1px solid #e5e9e2;border-radius:16px;padding:30px 18px;text-align:center;color:#68746c;line-height:1.6}
 .back{display:block;margin:0 auto 18px;background:var(--green);border:0}
+.home-hero[hidden],#categoryTitle[hidden]{display:none!important}
+body.category-open .intro{padding-top:8px}
 footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
 [dir=rtl] body{text-align:right}[dir=rtl] .top{justify-content:flex-start}
-@media(max-width:480px){.category-grid{grid-template-columns:1fr 1fr;gap:10px}.category{padding:18px 10px;font-size:16px}.product img{height:170px}}
+@media(max-width:600px){.home-hero{grid-template-columns:1fr;padding:22px 18px;gap:18px}.hero-gallery{min-height:155px;grid-template-rows:72px 72px}.category-grid{grid-template-columns:1fr 1fr;gap:10px}.category{min-height:155px}.category img{height:105px}.category .category-name{padding:11px 10px;font-size:14px}.product img{height:170px}}
 </style>
 </head>
 <body>
@@ -45,7 +67,9 @@ footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
  <p class="tag" id="tagline">FRESHNESS IN EVERY SIP</p>
 </header>
 <main>
- <section class="intro"><h1 id="heading">Our Menu</h1><p id="description">Freshly prepared with care.</p></section>
+ <section class="intro"><h1 id="heading">A Fresh Experience Awaits You</h1><p id="description">Discover something fresh, delicious and made with care.</p></section>
+ <section id="homeHero" class="home-hero"><div class="hero-copy"><span class="hero-kicker">BS FRESH JUICES</span><h2 id="heroTitle">Freshness, crafted for you.</h2><p id="heroText">A little moment of freshness can make your day better. Explore our collection and find your favourite.</p><span class="hero-note">MADE FRESH · SERVED WITH CARE</span></div><div class="hero-gallery" id="heroGallery"><div class="hero-placeholder">✦</div></div></section>
+ <h2 id="categoryTitle" class="section-heading">Choose Your Experience</h2>
  <button id="back" class="back" hidden type="button">← Back to categories</button>
  <section id="content" aria-live="polite"><div class="notice">Loading menu…</div></section>
 </main>
@@ -55,8 +79,8 @@ footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
 <script>
 const $=id=>document.getElementById(id);
 const words={
- en:{switch:"العربية",heading:"Our Menu",description:"Freshly prepared with care.",back:"← Back to categories",empty:"Our menu is being prepared. Please check back soon.",error:"We couldn't load the menu right now. Please try again later."},
- ar:{switch:"English",heading:"قائمتنا",description:"نحضّر كل شيء بعناية وطزاجة.",back:"العودة إلى الأقسام →",empty:"قائمتنا قيد التجهيز. زورونا قريباً.",error:"تعذّر تحميل القائمة حالياً. حاولوا مرة أخرى لاحقاً."}
+ en:{switch:"العربية",heading:"A Fresh Experience Awaits You",description:"Discover something fresh, delicious and made with care.",categoryTitle:"Choose Your Experience",heroTitle:"Freshness, crafted for you.",heroText:"A little moment of freshness can make your day better. Explore our collection and find your favourite.",back:"← Back to categories",empty:"Our menu is being prepared. Please check back soon.",error:"We couldn't load the menu right now. Please try again later."},
+ ar:{switch:"English",heading:"تجربة من الانتعاش بانتظارك",description:"اكتشف نكهات طازجة ولذيذة نحضّرها بكل عناية.",categoryTitle:"اختر تجربتك",heroTitle:"الانتعاش، محضّر خصيصاً لك.",heroText:"لحظة من الانتعاش قادرة تحلّي يومك. اكتشف مجموعتنا واختر مشروبك المفضّل.",back:"العودة إلى الأقسام →",empty:"قائمتنا قيد التجهيز. زورونا قريباً.",error:"تعذّر تحميل القائمة حالياً. حاولوا مرة أخرى لاحقاً."}
 };
 let lang="en",client=null,allProducts=[],currentCategory=null,cats=[];
 function tr(en,ar){return lang==="ar"?(ar||en):(en||ar);}
@@ -66,14 +90,23 @@ function publicImage(path){
 }
 function renderCategories(){
  currentCategory=null;document.body.classList.remove("category-open");$("back").hidden=true;
- $("heading").textContent=words[lang].heading;
+ $("homeHero").hidden=false;$("categoryTitle").hidden=false;
+ $("heading").textContent=words[lang].heading;$("description").textContent=words[lang].description;
+ $("heroTitle").textContent=words[lang].heroTitle;$("heroText").textContent=words[lang].heroText;
+ $("categoryTitle").textContent=words[lang].categoryTitle;
+ const heroItems=allProducts.filter(p=>p.image_path).slice(0,3);
+ $("heroGallery").innerHTML=heroItems.length?heroItems.map((p,i)=>'<img loading="lazy" src="'+escapeAttr(publicImage(p.image_path))+'" alt="'+escapeAttr(tr(p.name_en,p.name_ar))+'">').join(""):'<div class="hero-placeholder">✦</div>';
  const visible=cats;
  if(!visible.length){$("content").innerHTML='<div class="notice">'+words[lang].empty+'</div>';return;}
- $("content").innerHTML='<div class="category-grid">'+visible.map(c=>'<button class="category" type="button" data-cat="'+c.id+'">'+escapeHtml(tr(c.name_en,c.name_ar))+'</button>').join("")+'</div>';
+ $("content").innerHTML='<div class="category-grid">'+visible.map(c=>{
+  const first=allProducts.find(p=>p.category_id===c.id&&p.image_path);
+  const photo=first?'<img loading="lazy" src="'+escapeAttr(publicImage(first.image_path))+'" alt="">':'<img alt="" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27200%27 viewBox=%270 0 400 200%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x2=%271%27 y2=%271%27%3E%3Cstop stop-color=%27%23e8eee9%27/%3E%3Cstop offset=%271%27 stop-color=%27%23f5e7d2%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27400%27 height=%27200%27 fill=%27url(%23g)%27/%3E%3C/svg%3E">';
+  return '<button class="category" type="button" data-cat="'+c.id+'">'+photo+'<span class="category-name"><span>'+escapeHtml(tr(c.name_en,c.name_ar))+'</span><span class="category-arrow">›</span></span></button>';
+ }).join("")+'</div>';
  document.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>renderProducts(b.dataset.cat)));
 }
 function renderProducts(id){
- currentCategory=id;const cat=cats.find(c=>c.id===id);document.body.classList.add("category-open");
+ currentCategory=id;const cat=cats.find(c=>c.id===id);document.body.classList.add("category-open");$("homeHero").hidden=true;$("categoryTitle").hidden=true;
  const validColor=(v,f)=>/^#[0-9a-fA-F]{6}$/.test(v||"")?v:f;
  document.documentElement.style.setProperty("--view-primary",validColor(cat?.theme_primary,"#183d32"));
  document.documentElement.style.setProperty("--view-secondary",validColor(cat?.theme_secondary,"#e8eee9"));
