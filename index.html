@@ -3,37 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#123b2d">
+<meta name="theme-color" content="#F7F8F1">
 <title>BS Fresh Juices</title>
 <style>
-:root{--green:#183d32;--green2:#31584b;--cream:#faf9f5;--orange:#b88a50;--ink:#202820;--view-primary:#183d32;--view-secondary:#e8eee9;--view-accent:#b88a50;--view-bg:#faf9f5}
+:root{--green:#245B46;--green2:#39765B;--cream:#F7F8F1;--orange:#D5A94F;--ink:#26352D;--view-primary:#183d32;--view-secondary:#e8eee9;--view-accent:#b88a50;--view-bg:#faf9f5}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}
-header{background:var(--green);color:white;padding:22px 18px 42px;text-align:center}
+header{background:var(--cream);color:var(--green);padding:22px 18px 42px;text-align:center}
 .top{display:flex;justify-content:flex-end;max-width:1050px;margin:auto}
-button{font:inherit;cursor:pointer}.lang,.back{background:transparent;color:white;border:1px solid #ffffff80;border-radius:24px;padding:8px 14px}
+button{font:inherit;cursor:pointer}.lang,.back{background:transparent;color:var(--green);border:1px solid #245B4680;border-radius:24px;padding:8px 14px}
 .brand{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:2px;margin:22px 0 8px}
-.tag{color:#e8eee9;margin:0;font-size:14px;letter-spacing:1.5px}
+.tag{color:#39765B;margin:0;font-size:13px;font-weight:700;letter-spacing:1.5px}
 main{max-width:1050px;margin:-22px auto 0;padding:0 16px 55px}
 .intro{text-align:center;margin:0 auto 18px;max-width:760px;padding:24px 18px 10px}
 .intro h1{font-size:clamp(25px,5vw,38px);margin:0 0 10px;color:var(--green);letter-spacing:.2px}
 .intro p{margin:0;color:#68746c;line-height:1.7;font-size:15px}
-.home-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:20px;padding:25px;margin:0 0 28px;border-radius:24px;background:linear-gradient(135deg,#173d30,#315b49 72%,#52735e);color:#fff;box-shadow:0 18px 42px #173d3020}
+.home-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:20px;padding:25px;margin:0 0 28px;border-radius:24px;background:linear-gradient(135deg,#245B46,#39765B 72%,#6D9877);color:#fff;box-shadow:0 18px 42px #173d3020}
 .home-hero:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #ffffff20;border-radius:50%;right:-90px;top:-130px;pointer-events:none}
-.hero-copy{position:relative;z-index:1}.hero-kicker{display:inline-block;color:#e7d1a9;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.hero-copy{position:relative;z-index:1}.hero-kicker{display:none}
 .hero-copy h2{font-size:clamp(25px,4vw,39px);line-height:1.15;margin:0 0 12px;color:white}
 .hero-copy p{margin:0;color:#e3ebe5;line-height:1.7;font-size:14px;max-width:390px}
-.hero-note{display:inline-block;margin-top:18px;padding:9px 14px;border:1px solid #ffffff55;border-radius:30px;color:#fff;font-size:12px;letter-spacing:.5px}
+.hero-note{display:none}
 .hero-gallery{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:100px 100px;gap:10px;min-height:210px}
 .hero-gallery img{width:100%;height:100%;object-fit:cover;border-radius:16px;background:#ffffff20;box-shadow:0 8px 20px #0002}
 .hero-gallery img:first-child{grid-row:span 2}
 .hero-gallery .hero-placeholder{grid-row:span 2;border-radius:16px;background:linear-gradient(145deg,#f3d9a7,#d17b48 55%,#7c382d);display:flex;align-items:center;justify-content:center;font-size:52px}
 .section-heading{text-align:center;margin:0 0 16px;color:var(--green);font-size:19px;letter-spacing:.3px}
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px}
-.category{position:relative;overflow:hidden;min-height:185px;padding:0;text-align:left;border:1px solid #e5e9e2;border-radius:18px;background:#fff;color:var(--green);box-shadow:0 9px 28px #173d2510;transition:transform .18s,box-shadow .18s}
+.category{position:relative;overflow:hidden;min-height:185px;padding:0;text-align:left;border:1px solid #E3E9DF;border-radius:18px;background:#fff;color:var(--green);box-shadow:0 9px 28px #245B4612;transition:transform .18s,box-shadow .18s}
 .category:active{transform:scale(.985)}
 .category img{display:block;width:100%;height:132px;object-fit:cover;background:linear-gradient(135deg,#e6eee7,#f7ead8)}
 .category .category-name{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:13px 14px;font-size:16px;font-weight:700}
-.category .category-arrow{color:#b88a50;font-size:20px}
+.category .category-arrow{color:#D5A94F;font-size:20px}
 
 .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .product{background:var(--view-secondary);border:1px solid color-mix(in srgb,var(--view-primary) 14%,white);border-radius:16px;overflow:hidden;box-shadow:0 8px 25px #173d250b}
@@ -47,7 +47,7 @@ body.category-open .intro h1{color:var(--view-primary)}
 body.category-open .product .info{background:var(--view-secondary)}
 body.category-open .product p{color:color-mix(in srgb,var(--view-primary) 70%,#777)}
 .notice{background:white;border:1px solid #e5e9e2;border-radius:16px;padding:30px 18px;text-align:center;color:#68746c;line-height:1.6}
-.back{display:block;margin:0 auto 18px;background:var(--green);border:0}
+.back{display:block;margin:0 auto 18px;background:var(--green);color:white;border:0}
 .home-hero[hidden],#categoryTitle[hidden]{display:none!important}
 body.category-open .intro{padding-top:8px}
 footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
@@ -59,11 +59,11 @@ footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
 <header>
  <div class="top"><button class="lang" id="language" type="button">العربية</button></div>
  <img id="brandLogo" alt="BS Fresh Juices logo" hidden style="display:none;max-width:150px;max-height:90px;object-fit:contain;margin:18px auto 8px"><div class="brand" id="brand">BS FRESH JUICES</div>
- <p class="tag" id="tagline">FRESHNESS IN EVERY SIP</p>
+ <p class="tag" id="tagline">JUICES · COFFEE · MORE</p>
 </header>
 <main>
- <section class="intro"><h1 id="heading">A Fresh Experience Awaits You</h1><p id="description">Discover something fresh, delicious and made with care.</p></section>
- <section id="homeHero" class="home-hero"><div class="hero-copy"><span class="hero-kicker">BS FRESH JUICES</span><h2 id="heroTitle">Freshness, crafted for you.</h2><p id="heroText">A little moment of freshness can make your day better. Explore our collection and find your favourite.</p><span class="hero-note">MADE FRESH · SERVED WITH CARE</span></div><div class="hero-gallery" id="heroGallery"><div class="hero-placeholder">✦</div></div></section>
+ <section class="intro"><h1 id="heading">Explore Our Menu</h1><p id="description">Thoughtfully prepared choices for every taste.</p></section>
+ <section id="homeHero" class="home-hero"><div class="hero-copy"><span class="hero-kicker">BS FRESH JUICES</span><h2 id="heroTitle">Find Your Next Favourite.</h2><p id="heroText">Explore a selection of drinks and flavours, thoughtfully prepared for you.</p><span class="hero-note">MADE FRESH · SERVED WITH CARE</span></div><div class="hero-gallery" id="heroGallery"><div class="hero-placeholder">✦</div></div></section>
  <h2 id="categoryTitle" class="section-heading">Choose Your Experience</h2>
  <button id="back" class="back" hidden type="button">← Back to categories</button>
  <section id="content" aria-live="polite"><div class="notice">Loading menu…</div></section>
@@ -74,8 +74,8 @@ footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
 <script>
 const $=id=>document.getElementById(id);
 const words={
- en:{switch:"العربية",heading:"A Fresh Experience Awaits You",description:"Discover something fresh, delicious and made with care.",categoryTitle:"Choose Your Experience",heroTitle:"Freshness, crafted for you.",heroText:"A little moment of freshness can make your day better. Explore our collection and find your favourite.",back:"← Back to categories",empty:"Our menu is being prepared. Please check back soon.",error:"We couldn't load the menu right now. Please try again later."},
- ar:{switch:"English",heading:"تجربة من الانتعاش بانتظارك",description:"اكتشف نكهات طازجة ولذيذة نحضّرها بكل عناية.",categoryTitle:"اختر تجربتك",heroTitle:"الانتعاش، محضّر خصيصاً لك.",heroText:"لحظة من الانتعاش قادرة تحلّي يومك. اكتشف مجموعتنا واختر مشروبك المفضّل.",back:"العودة إلى الأقسام →",empty:"قائمتنا قيد التجهيز. زورونا قريباً.",error:"تعذّر تحميل القائمة حالياً. حاولوا مرة أخرى لاحقاً."}
+ en:{switch:"العربية",heading:"Explore Our Menu",description:"Thoughtfully prepared choices for every taste.",categoryTitle:"Explore the Menu",heroTitle:"Find Your Next Favourite.",heroText:"Explore a selection of drinks and flavours, thoughtfully prepared for you.",back:"← Back to categories",empty:"Our menu is being prepared. Please check back soon.",error:"We couldn't load the menu right now. Please try again later."},
+ ar:{switch:"English",heading:"استكشف قائمتنا",description:"خيارات مختارة بعناية لتجد ما يناسب ذوقك.",categoryTitle:"تصفّح الأقسام",heroTitle:"نكهات تستحق التجربة",heroText:"مجموعة من المشروبات والنكهات المحضّرة بعناية لتختار ما تحب.",back:"العودة إلى الأقسام →",empty:"قائمتنا قيد التجهيز. زورونا قريباً.",error:"تعذّر تحميل القائمة حالياً. حاولوا مرة أخرى لاحقاً."}
 };
 let lang="en",client=null,allProducts=[],currentCategory=null,cats=[];
 function tr(en,ar){return lang==="ar"?(ar||en):(en||ar);}
