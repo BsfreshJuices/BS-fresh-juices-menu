@@ -5,7 +5,7 @@ const words={
 };
 const USD_TO_LBP=90000;
 let lang="en",client=null,allProducts=[],currentCategory=null,cats=[];
-function formatPrice(value){const usd=Number(value);if(!Number.isFinite(usd))return "";const lbp=Math.round(usd*USD_TO_LBP);return '<div class="price"><span class="price-lbp">' + new Intl.NumberFormat("en-US",{maximumFractionDigits:0}).format(lbp) + (lang==="ar"?" ل.ل.":" LBP") + '</span><span class="price-usd">$' + usd.toFixed(2) + '</span></div>';}
+function formatPrice(value,exactLbp){const usd=Number(value);if(!Number.isFinite(usd))return "";const lbp=exactLbp!==null&&exactLbp!==undefined?Number(exactLbp):Math.round(usd*USD_TO_LBP);const displayUsd=(lbp/USD_TO_LBP).toFixed(2);return '<div class="price"><span class="price-lbp">' + new Intl.NumberFormat("en-US",{maximumFractionDigits:0}).format(lbp) + (lang==="ar"?" ل.ل.":" LBP") + '</span><span class="price-usd">$' + displayUsd + '</span></div>';}
 function tr(en,ar){return lang==="ar"?(ar||en):(en||ar);}
 function publicImage(path){
  if(!path||!client)return "";
@@ -50,7 +50,7 @@ function renderProducts(id){
  return '<article class="product">'+(image?'<img loading="lazy" src="'+escapeAttr(image)+'" alt="'+escapeAttr(tr(p.name_en,p.name_ar))+'">':'')+
  '<div class="info"><h3>'+escapeHtml(tr(p.name_en,p.name_ar))+'</h3>'+
  ((tr(p.description_en,p.description_ar))?'<p>'+escapeHtml(tr(p.description_en,p.description_ar))+'</p>':'')+
- (p.price!==null&&p.price!==undefined?formatPrice(p.price):'')+
+ (p.price!==null&&p.price!==undefined?formatPrice(p.price,p.price_lbp):'')+
  '</div></article>';
  }).join("")+'</div>';
 }
