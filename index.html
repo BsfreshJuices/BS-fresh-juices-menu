@@ -107,7 +107,7 @@ function renderCategories(){
  document.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>renderProducts(b.dataset.cat)));renderSoonCountdowns();
 }
 function renderSoonCountdowns(){
- document.querySelectorAll("[data-launch]").forEach(el=>{const target=Date.parse(el.dataset.launch);const diff=target-Date.now();if(diff<=0){el.textContent="";return;}let s=Math.floor(diff/1000);const d=Math.floor(s/86400);s%=86400;const h=Math.floor(s/3600);s%=3600;const m=Math.floor(s/60);s%=60;const pad=n=>String(n).padStart(2,"0");el.textContent=lang==="ar"?d+" "+words.ar.days+"  "+pad(h)+" "+words.ar.hours+"  "+pad(m)+" "+words.ar.minutes+"  "+pad(s)+" "+words.ar.seconds:d+" "+words.en.days+"  "+pad(h)+" "+words.en.hours+"  "+pad(m)+" "+words.en.minutes+"  "+pad(s)+" "+words.en.seconds;});
+ let expired=false;document.querySelectorAll("[data-launch]").forEach(el=>{const target=Date.parse(el.dataset.launch);const diff=target-Date.now();if(diff<=0){expired=true;return;}let s=Math.floor(diff/1000);const d=Math.floor(s/86400);s%=86400;const h=Math.floor(s/3600);s%=3600;const m=Math.floor(s/60);s%=60;const pad=n=>String(n).padStart(2,"0");el.textContent=lang==="ar"?d+" "+words.ar.days+"  "+pad(h)+" "+words.ar.hours+"  "+pad(m)+" "+words.ar.minutes+"  "+pad(s)+" "+words.ar.seconds:d+" "+words.en.days+"  "+pad(h)+" "+words.en.hours+"  "+pad(m)+" "+words.en.minutes+"  "+pad(s)+" "+words.en.seconds;});if(expired)renderCategories();
 }
 setInterval(()=>{if(!currentCategory)renderSoonCountdowns();},1000);
 function renderProducts(id){
