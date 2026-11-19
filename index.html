@@ -63,7 +63,7 @@ footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
 </header>
 <main>
  <section class="intro"><h1 id="heading">Explore Our Menu</h1><p id="description">Thoughtfully prepared choices for every taste.</p></section>
- <section id="homeHero" class="home-hero"><div class="hero-copy"><span class="hero-kicker">BS FRESH JUICES</span><h2 id="heroTitle">Find Your Next Favourite.</h2><p id="heroText">Explore a selection of drinks and flavours, thoughtfully prepared for you.</p><span class="hero-note">MADE FRESH · SERVED WITH CARE</span></div><div class="hero-gallery" id="heroGallery"><div class="hero-placeholder">✦</div></div></section>
+ <section id="homeHero" class="home-hero"><div class="hero-copy"><span class="hero-kicker">BS FRESH JUICES</span><h2 id="heroTitle">Find Your Next Favourite.</h2><p id="heroText">Explore a selection of drinks and flavours, thoughtfully prepared for you.</p><span class="hero-note">MADE FRESH · SERVED WITH CARE</span></div><div class="hero-gallery" id="heroGallery"><div class="hero-placeholder" aria-hidden="true"></div></div></section>
  <h2 id="categoryTitle" class="section-heading">Choose Your Experience</h2>
  <button id="back" class="back" hidden type="button">← Back to categories</button>
  <section id="content" aria-live="polite"><div class="notice">Loading menu…</div></section>
@@ -90,7 +90,7 @@ function renderCategories(){
  $("heroTitle").textContent=words[lang].heroTitle;$("heroText").textContent=words[lang].heroText;
  $("categoryTitle").textContent=words[lang].categoryTitle;
  const heroItems=allProducts.filter(p=>p.image_path).slice(0,3);
- $("heroGallery").innerHTML=heroItems.length?heroItems.map((p,i)=>'<img loading="lazy" src="'+escapeAttr(publicImage(p.image_path))+'" alt="'+escapeAttr(tr(p.name_en,p.name_ar))+'">').join(""):'<div class="hero-placeholder">✦</div>';
+ $("heroGallery").innerHTML=heroItems.length?heroItems.map((p,i)=>'<img loading="lazy" src="'+escapeAttr(publicImage(p.image_path))+'" alt="'+escapeAttr(tr(p.name_en,p.name_ar))+'">').join(""):'<div class="hero-placeholder" aria-hidden="true"></div>';
  const visible=cats;
  if(!visible.length){$("content").innerHTML='<div class="notice">'+words[lang].empty+'</div>';return;}
  $("content").innerHTML='<div class="category-grid">'+visible.map(c=>{
