@@ -9,7 +9,7 @@
 :root{--green:#245B46;--green2:#39765B;--cream:#F7F8F1;--orange:#D5A94F;--ink:#26352D;--view-primary:#183d32;--view-secondary:#e8eee9;--view-accent:#b88a50;--view-bg:#faf9f5}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}
 header{background:#FFF4DF;color:#174B19;padding:12px 18px 28px;text-align:center}
-.top{display:flex;justify-content:flex-end;max-width:1050px;margin:auto}
+.top{display:flex;justify-content:flex-end;align-items:center;gap:10px;max-width:1050px;margin:auto}
 button{font:inherit;cursor:pointer}.lang,.back{background:transparent;color:#174B19;border:1px solid #174B1966;border-radius:24px;padding:8px 14px}
 .brand{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:2px;margin:12px 0 6px}
 .tag{color:#39765B;margin:0;font-size:13px;font-weight:700;letter-spacing:1.5px}
@@ -46,12 +46,15 @@ body.category-open{background:var(--view-bg)}
 body.category-open header{position:relative;z-index:1;background:var(--view-primary);padding-bottom:24px;color:#fff}
 body.category-open header .lang{color:#fff;border-color:#ffffff88}
 body.category-open main{margin:0 auto 0;padding-top:0}
-body.category-open .intro{padding-top:28px;margin-bottom:18px}
+body.category-open .intro{display:none}
 body.category-open .intro h1{color:var(--view-primary)}
 body.category-open .product .info{background:var(--view-secondary)}
 body.category-open .product p{color:color-mix(in srgb,var(--view-primary) 70%,#777)}
 .notice{background:white;border:1px solid #e5e9e2;border-radius:16px;padding:30px 18px;text-align:center;color:#68746c;line-height:1.6}
-.back{display:block;margin:0 auto 18px;background:var(--green);color:white;border:0}.back[hidden]{display:none!important}
+.back{display:block;margin:0;background:transparent;color:inherit;border:1px solid currentColor;border-radius:24px;padding:8px 14px}.back[hidden]{display:none!important}
+.category-header-title{margin:16px 0 0;font-size:clamp(25px,5vw,38px);letter-spacing:.2px;color:#fff}
+body.category-open #brandLogo,body.category-open .brand,body.category-open .tag{display:none!important}
+body.category-open .category-header-title{display:block}
 .home-hero[hidden],#categoryTitle[hidden]{display:none!important}
 footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
 [dir=rtl] body{text-align:right}[dir=rtl] .top{justify-content:flex-start}
@@ -60,15 +63,14 @@ footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
 </head>
 <body>
 <header>
- <div class="top"><button class="lang" id="language" type="button">العربية</button></div>
+ <div class="top"><button id="back" class="back" hidden type="button">← Back to categories</button><button class="lang" id="language" type="button">العربية</button></div>
  <img id="brandLogo" alt="BS Fresh Juices logo" hidden style="display:none;max-width:150px;max-height:82px;object-fit:contain;margin:8px auto 4px"><div class="brand" id="brand">BS FRESH JUICES</div>
- <p class="tag" id="tagline">JUICES · COFFEE · MORE</p>
+ <p class="tag" id="tagline">JUICES · COFFEE · MORE</p><h1 id="categoryHeaderTitle" class="category-header-title" hidden></h1>
 </header>
 <main>
  <section class="intro"><h1 id="heading">Explore Our Menu</h1><p id="description">Thoughtfully prepared choices for every taste.</p></section>
  <section id="homeHero" class="home-hero"><div class="hero-copy"><span class="hero-kicker">BS FRESH JUICES</span><h2 id="heroTitle">Find Your Next Favourite.</h2><p id="heroText">Explore a selection of drinks and flavours, thoughtfully prepared for you.</p><span class="hero-note">MADE FRESH · SERVED WITH CARE</span></div><div class="hero-gallery" id="heroGallery"><div class="hero-placeholder" aria-hidden="true"></div></div></section>
  <h2 id="categoryTitle" class="section-heading">Choose Your Experience</h2>
- <button id="back" class="back" hidden type="button">← Back to categories</button>
  <section id="content" aria-live="polite"><div class="notice">Loading menu…</div></section>
 </main>
 <footer>© <span id="year"></span> <span id="footerBrand">BS Fresh Juices</span></footer>
@@ -87,7 +89,7 @@ function publicImage(path){
  return client.storage.from("menu-images").getPublicUrl(path).data.publicUrl;
 }
 function renderCategories(){
- currentCategory=null;document.body.classList.remove("category-open");$("back").hidden=true;
+ currentCategory=null;document.body.classList.remove("category-open");$("back").hidden=true;$("categoryHeaderTitle").hidden=true;
  $("homeHero").hidden=false;$("categoryTitle").hidden=false;
  $("heading").textContent=words[lang].heading;$("description").textContent=words[lang].description;
  $("heroTitle").textContent=words[lang].heroTitle;$("heroText").textContent=words[lang].heroText;
@@ -110,6 +112,7 @@ function renderProducts(id){
  document.documentElement.style.setProperty("--view-accent",validColor(cat?.theme_accent,"#b88a50"));
  document.documentElement.style.setProperty("--view-bg",validColor(cat?.theme_background,"#faf9f5"));
  $("back").hidden=false;
+ $("categoryHeaderTitle").hidden=false;$("categoryHeaderTitle").textContent=tr(cat?.name_en,cat?.name_ar)||words[lang].heading;
  $("heading").textContent=tr(cat?.name_en,cat?.name_ar)||words[lang].heading;
  const items=allProducts.filter(p=>p.category_id===id);
  if(!items.length){$("content").innerHTML='<div class="notice">'+words[lang].empty+'</div>';return;}
