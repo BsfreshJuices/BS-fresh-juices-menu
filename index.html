@@ -74,8 +74,8 @@ footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
 <script>
 const $=id=>document.getElementById(id);
 const words={
- en:{switch:"العربية",heading:"Explore Our Menu",description:"Thoughtfully prepared choices for every taste.",categoryTitle:"Choose Your Experience",heroTitle:"Find Your Next Favourite.",heroText:"Explore a selection of drinks and flavours, thoughtfully prepared for you.",back:"← Back to categories",empty:"Our menu is being prepared. Please check back soon.",error:"We couldn't load the menu right now. Please try again later."},
- ar:{switch:"English",heading:"استكشف قائمتنا",description:"خيارات مختارة بعناية لتجد ما يناسب ذوقك.",categoryTitle:"اختر تجربتك",heroTitle:"نكهات تستحق التجربة",heroText:"مجموعة من المشروبات والنكهات المحضّرة بعناية لتختار ما تحب.",back:"العودة إلى الأقسام →",empty:"قائمتنا قيد التجهيز. زورونا قريباً.",error:"تعذّر تحميل القائمة حالياً. حاولوا مرة أخرى لاحقاً."}
+ en:{switch:"العربية",heading:"Explore Our Menu",description:"Thoughtfully prepared choices for every taste.",categoryTitle:"Categories",heroTitle:"Find Your Next Favourite.",heroText:"Explore a selection of drinks and flavours, thoughtfully prepared for you.",back:"← Back to categories",empty:"Our menu is being prepared. Please check back soon.",error:"We couldn't load the menu right now. Please try again later."},
+ ar:{switch:"English",heading:"استكشف قائمتنا",description:"خيارات مختارة بعناية لتجد ما يناسب ذوقك.",categoryTitle:"الأقسام",heroTitle:"نكهات تستحق التجربة",heroText:"مجموعة من المشروبات والنكهات المحضّرة بعناية لتختار ما تحب.",back:"العودة إلى الأقسام →",empty:"قائمتنا قيد التجهيز. زورونا قريباً.",error:"تعذّر تحميل القائمة حالياً. حاولوا مرة أخرى لاحقاً."}
 };
 let lang="en",client=null,allProducts=[],currentCategory=null,cats=[];
 function tr(en,ar){return lang==="ar"?(ar||en):(en||ar);}
