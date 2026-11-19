@@ -92,7 +92,8 @@ async function enter(u){
  $("login").style.display="none";$("app").style.display="block";$("who").textContent=u.email||"Admin";await loadAll();
 }
 async function loadAll(){await loadCategories();await loadProducts();const r=await sb.from("site_settings").select("*").eq("id",1).single();if(r.error){say(r.error.message);return;}settings=r.data;fillSettings();}
-function localDateTimeValue(value){const d=new Date(value);const z=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+z(d.getMonth()+1)+"-"+z(d.getDate())+"T"+z(d.getHours())+":"+z(d.getMinutes());}\nfunction setColorField(id,value){const v=/^#[0-9a-fA-F]{6}$/.test(value||"")?value:"#123b2d";$(id).value=v;$(id+"Hex").value=v.toUpperCase();}
+function localDateTimeValue(value){const d=new Date(value);const z=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+z(d.getMonth()+1)+"-"+z(d.getDate())+"T"+z(d.getHours())+":"+z(d.getMinutes());}
+function setColorField(id,value){const v=/^#[0-9a-fA-F]{6}$/.test(value||"")?value:"#123b2d";$(id).value=v;$(id+"Hex").value=v.toUpperCase();}
 function fillSettings(){if(!settings)return;$("brand").value=settings.brand_name||"";$("tagEn").value=settings.tagline_en||"";$("tagAr").value=settings.tagline_ar||"";$("logoPreview").innerHTML=settings.logo_path?'<img class="preview" src="'+esc(publicImage(settings.logo_path))+'" alt="Current logo">':'<span class="muted">No logo uploaded</span>';}
 function readColor(id){const raw=$(id+"Hex").value.trim();if(!/^#?[0-9a-fA-F]{6}$/.test(raw))throw new Error("Enter a valid 6-digit colour code for "+id+". Example: #123B2D");const value=raw.startsWith("#")?raw:"#"+raw;$(id).value=value;$(id+"Hex").value=value.toUpperCase();return value;}
 function setThemeFields(prefix,c){const defs={Primary:c.theme_primary||"#183d32",Secondary:c.theme_secondary||"#e8eee9",Accent:c.theme_accent||"#b88a50",Background:c.theme_background||"#faf9f5"};Object.entries(defs).forEach(([k,v])=>setColorField(prefix+k,v));}
