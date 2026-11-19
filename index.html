@@ -41,7 +41,7 @@ body.category-open .intro{display:block}
 .product img{width:100%;height:190px;object-fit:cover;background:var(--view-bg);display:block}
 .product .info{padding:15px}.product h3{margin:0 0 7px;color:var(--view-primary);font-size:18px}
 .product p{margin:0;color:#68746c;line-height:1.5;font-size:14px;white-space:pre-wrap}
-.price{display:flex;align-items:baseline;flex-wrap:wrap;gap:9px;margin-top:12px;font-weight:800}.price-usd{color:var(--view-accent);font-size:18px}.price-lbp{color:color-mix(in srgb,var(--view-primary) 65%,#888);font-size:13px;font-weight:600}
+.price{display:flex;align-items:baseline;flex-wrap:wrap;gap:9px;margin-top:12px;font-weight:800}.price-lbp{color:var(--view-accent);font-size:18px}.price-usd{color:color-mix(in srgb,var(--view-primary) 65%,#888);font-size:13px;font-weight:600}
 body.category-open{background:var(--view-bg)}
 body.category-open header{position:relative;z-index:1;background:var(--view-primary);padding-bottom:24px;color:#fff}
 body.category-open header .lang{color:#fff;border-color:#ffffff88}
@@ -84,7 +84,8 @@ const words={
 };
 const USD_TO_LBP=90000;
 let lang="en",client=null,allProducts=[],currentCategory=null,cats=[];
-function formatPrice(value){const usd=Number(value);if(!Number.isFinite(usd))return "";const lbp=Math.round(usd*USD_TO_LBP);return '<div class="price"><span class="price-lbp">' + new Intl.NumberFormat("en-US",{maximumFractionDigits:0}).format(lbp) + (lang==="ar"?" ل.ل.":" LBP") + '</span><span class="price-usd">function tr(en,ar){return lang==="ar"?(ar||en):(en||ar);}
+function formatPrice(value){const usd=Number(value);if(!Number.isFinite(usd))return "";const lbp=Math.round(usd*USD_TO_LBP);return '<div class="price"><span class="price-lbp">' + new Intl.NumberFormat("en-US",{maximumFractionDigits:0}).format(lbp) + (lang==="ar"?" ل.ل.":" LBP") + '</span><span class="price-usd">$' + usd.toFixed(2) + '</span></div>';}
+function tr(en,ar){return lang==="ar"?(ar||en):(en||ar);}
 function publicImage(path){
  if(!path||!client)return "";
  return client.storage.from("menu-images").getPublicUrl(path).data.publicUrl;
