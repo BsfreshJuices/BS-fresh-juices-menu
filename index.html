@@ -94,8 +94,7 @@ function renderCategories(){
  const visible=cats;
  if(!visible.length){$("content").innerHTML='<div class="notice">'+words[lang].empty+'</div>';return;}
  $("content").innerHTML='<div class="category-grid">'+visible.map(c=>{
-  const first=allProducts.find(p=>p.category_id===c.id&&p.image_path);
-  const photo=first?'<img loading="lazy" src="'+escapeAttr(publicImage(first.image_path))+'" alt="">':'<img alt="" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27200%27 viewBox=%270 0 400 200%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x2=%271%27 y2=%271%27%3E%3Cstop stop-color=%27%23e8eee9%27/%3E%3Cstop offset=%271%27 stop-color=%27%23f5e7d2%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27400%27 height=%27200%27 fill=%27url(%23g)%27/%3E%3C/svg%3E">';
+  const photo=c.image_path?'<img loading="lazy" src="'+escapeAttr(publicImage(c.image_path))+'" alt="'+escapeAttr(tr(c.name_en,c.name_ar))+'">':'<img alt="" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27200%27 viewBox=%270 0 400 200%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x2=%271%27 y2=%271%27%3E%3Cstop stop-color=%27%23e8eee9%27/%3E%3Cstop offset=%271%27 stop-color=%27%23f5e7d2%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27400%27 height=%27200%27 fill=%27url(%23g)%27/%3E%3C/svg%3E">';
   return '<button class="category" type="button" data-cat="'+c.id+'">'+photo+'<span class="category-name"><span>'+escapeHtml(tr(c.name_en,c.name_ar))+'</span><span class="category-arrow">›</span></span></button>';
  }).join("")+'</div>';
  document.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>renderProducts(b.dataset.cat)));
