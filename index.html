@@ -29,9 +29,9 @@ main{max-width:1050px;margin:-22px auto 0;padding:0 16px 55px}
 .hero-gallery .hero-placeholder{display:none}
 .section-heading{text-align:center;margin:0 0 16px;color:var(--green);font-size:19px;letter-spacing:.3px}
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px}
-.category{position:relative;overflow:hidden;min-height:185px;padding:0;text-align:left;border:1px solid #E3E9DF;border-radius:18px;background:#fff;color:var(--green);box-shadow:0 9px 28px #245B4612;transition:transform .18s,box-shadow .18s}
+.category{position:relative;overflow:hidden;min-height:185px;padding:134px 0 0;text-align:left;border:1px solid #E3E9DF;border-radius:18px;background:#fff;color:var(--green);box-shadow:0 9px 28px #245B4612;transition:transform .18s,box-shadow .18s}
 .category:active{transform:scale(.985)}
-.category img{display:block;width:calc(100% + 2px);height:134px;margin:-1px -1px 0;object-fit:cover;object-position:center;background:linear-gradient(135deg,#e6eee7,#f7ead8)}
+.category img{position:absolute;top:0;left:0;display:block;width:100%;height:134px;margin:0;object-fit:cover;object-position:center;background:linear-gradient(135deg,#e6eee7,#f7ead8)}
 .category .category-name{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:13px 14px;font-size:16px;font-weight:700}
 .category .category-arrow{color:#D5A94F;font-size:20px}
 
@@ -52,7 +52,7 @@ body.category-open .product p{color:color-mix(in srgb,var(--view-primary) 70%,#7
 body.category-open .intro{padding-top:8px}
 footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
 [dir=rtl] body{text-align:right}[dir=rtl] .top{justify-content:flex-start}
-@media(max-width:600px){.home-hero{grid-template-columns:1fr;padding:22px 18px;gap:18px}.hero-gallery{min-height:155px;grid-template-rows:72px 72px}.category-grid{grid-template-columns:1fr 1fr;gap:10px}.category{min-height:155px}.category img{height:107px}.category .category-name{padding:11px 10px;font-size:14px}.product img{height:170px}}
+@media(max-width:600px){.home-hero{grid-template-columns:1fr;padding:22px 18px;gap:18px}.hero-gallery{min-height:155px;grid-template-rows:72px 72px}.category-grid{grid-template-columns:1fr 1fr;gap:10px}.category{min-height:155px;padding-top:107px}.category img{height:107px}.category .category-name{padding:11px 10px;font-size:14px}.product img{height:170px}}
 </style>
 </head>
 <body>
