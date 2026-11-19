@@ -17,7 +17,7 @@ function renderCategories(){
  $("heading").textContent=words[lang].heading;$("description").textContent=words[lang].description;
  $("heroTitle").textContent=words[lang].heroTitle;$("heroText").textContent=words[lang].heroText;
  $("categoryTitle").textContent=words[lang].categoryTitle;
- const heroItems=allProducts.filter(p=>p.image_path).slice(0,3);
+ const heroItems=[];
  $("homeHero").classList.toggle("no-gallery",!heroItems.length);$("heroGallery").style.display=heroItems.length?"grid":"none";$("heroGallery").innerHTML=heroItems.length?heroItems.map((p,i)=>'<img loading="lazy" src="'+escapeAttr(publicImage(p.image_path))+'" alt="'+escapeAttr(tr(p.name_en,p.name_ar))+'">').join(""):"";
  const visible=cats;
  if(!visible.length){$("content").innerHTML='<div class="notice">'+words[lang].empty+'</div>';return;}
