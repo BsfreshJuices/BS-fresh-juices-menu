@@ -11,7 +11,7 @@
 header{background:#FFF4DF;color:#174B19;padding:12px 18px 28px;text-align:center}
 .top{display:flex;direction:ltr;justify-content:flex-end;align-items:center;gap:10px;max-width:1050px;margin:auto}
 button{font:inherit;cursor:pointer}.lang,.back{background:transparent;color:#174B19;border:1px solid #174B1966;border-radius:24px;padding:8px 14px}
-.brand{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:2px;margin:12px 0 6px}
+.brand-lockup{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-width:0}.brand-lockup #brandLogo{display:block;max-width:150px;max-height:82px;object-fit:contain;margin:8px auto 4px}.brand-lockup .brand{display:block!important;visibility:visible!important;font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:2px;margin:12px 0 6px;line-height:1.15}.brand-lockup .tag{display:block!important;visibility:visible!important;color:#39765B;margin:0;font-size:13px;font-weight:700;letter-spacing:1.5px}
 .tag{color:#39765B;margin:0;font-size:13px;font-weight:700;letter-spacing:1.5px}
 main{max-width:1050px;margin:0 auto;padding:0 16px 55px}
 .intro{display:none;text-align:center;margin:0 auto 18px;max-width:760px;padding:28px 18px 10px}
@@ -64,8 +64,7 @@ footer{text-align:center;color:#7a857d;font-size:12px;padding:20px}
 <body>
 <header>
  <div class="top"><button id="back" class="back" hidden type="button">← Back to categories</button><button class="lang" id="language" type="button">العربية</button></div>
- <img id="brandLogo" alt="BS Fresh Juices logo" hidden style="display:none;max-width:150px;max-height:82px;object-fit:contain;margin:8px auto 4px"><div class="brand" id="brand">BS FRESH JUICES</div>
- <p class="tag" id="tagline">FRESH DRINKS · COFFEE · MORE</p><h1 id="categoryHeaderTitle" class="category-header-title" hidden></h1>
+ <div class="brand-lockup"><img id="brandLogo" alt="BS Fresh Juices logo" hidden><div class="brand" id="brand">BS FRESH JUICES</div><p class="tag" id="tagline">FRESH DRINKS · COFFEE · MORE</p></div><h1 id="categoryHeaderTitle" class="category-header-title" hidden></h1>
 </header>
 <main>
  <section class="intro"><h1 id="heading">Explore Our Menu</h1><p id="description">Thoughtfully prepared choices for every taste.</p></section>
