@@ -74,7 +74,7 @@ async function start(){
    client.from("products").select("*").eq("is_active",true).order("sort_order").order("created_at")
   ]);
   if(settings.error)throw settings.error;if(categories.error)throw categories.error;if(products.error)throw products.error;
-  if(settings.data){const s=settings.data;$("brand").textContent=s.brand_name||"BS FRESH JUICES";if(s.logo_path){$("brandLogo").src=publicImage(s.logo_path);$("brandLogo").hidden=false;$("brandLogo").style.display="block";$("brand").style.display="none";}else{$("brandLogo").hidden=true;$("brandLogo").style.display="none";$("brand").style.display="block";}$("footerBrand").textContent=s.brand_name||"BS Fresh Juices";$("tagline").textContent=tr(s.tagline_en,s.tagline_ar)||words[lang].description;/* Homepage colours stay intentionally calm and premium; category pages use their own saved themes. */}
+  if(settings.data){const s=settings.data;$("brand").textContent=s.brand_name||"BS FRESH JUICES";if(s.logo_path){$("brandLogo").src=publicImage(s.logo_path);$("brandLogo").hidden=false;$("brandLogo").style.display="block";}else{$("brandLogo").hidden=true;$("brandLogo").style.display="none";}$("brand").style.display="block";$("footerBrand").textContent=s.brand_name||"BS Fresh Juices";$("tagline").textContent=tr(s.tagline_en,s.tagline_ar)||words[lang].description;/* Homepage colours stay intentionally calm and premium; category pages use their own saved themes. */}
   cats=categories.data||[];allProducts=products.data||[];applyLanguage();
  }catch(err){console.error(err);$("content").innerHTML='<div class="notice">'+words[lang].error+'</div>';}
 }
